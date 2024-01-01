@@ -1,4 +1,4 @@
-import UsefulTerminal from "@/utils/UsefulTerminal";
+import UsefulTerminal from "@/app/utils/UsefulTerminal";
 import { terminal } from "terminal-kit";
 
 export default async function foundationsMenu() {
