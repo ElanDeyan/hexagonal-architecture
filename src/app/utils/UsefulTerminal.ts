@@ -13,6 +13,23 @@ export default class UsefulTerminal {
     terminal.clear();
   }
 
+  static async menu(options: string[]): Promise<[number, string]> {
+    const answer = await terminal.singleColumnMenu(options).promise;
+
+    return [answer.selectedIndex, answer.selectedText];
+  }
+
+  static async select(
+    text: string,
+    options: string[]
+  ): Promise<[number, string]> {
+    terminal.yellow(`\n${text}`);
+
+    const answer = await terminal.singleLineMenu(options).promise;
+
+    return [answer.selectedIndex, answer.selectedText];
+  }
+
   static title(text: string) {
     terminal.clear();
 
