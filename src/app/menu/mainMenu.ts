@@ -1,14 +1,12 @@
 import UsefulTerminal from "@/app/utils/UsefulTerminal";
-import { terminal } from "terminal-kit";
 import foundationsMenu from "./foundationsMenu";
 
 export default async function mainMenu() {
   UsefulTerminal.title("Main menu");
 
-  const userChoice = await terminal.singleColumnMenu(["1. Foundations", "Exit"])
-    .promise;
+  const [index] = await UsefulTerminal.menu(["1. Foundations", "Exit"]);
 
-  switch (userChoice.selectedIndex) {
+  switch (index) {
     case 0:
       await foundationsMenu();
       break;
