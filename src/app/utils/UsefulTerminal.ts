@@ -1,6 +1,11 @@
 import { terminal } from "terminal-kit";
 
 export default class UsefulTerminal {
+
+  static clear() {
+    terminal.clear()
+  }
+
   static title(text: string) {
     terminal.clear();
 
