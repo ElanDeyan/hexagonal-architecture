@@ -1,17 +1,15 @@
 import UsefulTerminal from "@/app/utils/UsefulTerminal";
-import { terminal } from "terminal-kit";
+import polymorphism from "../foundations/polymorphism";
 
 export default async function foundationsMenu() {
   UsefulTerminal.title("Foundations");
 
-  const userChoice = await terminal.singleColumnMenu([
-    "1. Polymorphism",
-    "Back",
-  ]).promise;
+  const [index] = await UsefulTerminal.menu(["1. Polymorphism", "Back"]);
 
-  switch (userChoice.selectedIndex) {
+  switch (index) {
     case 0:
-      break;
+        await polymorphism()
+        break;
     case 1:
       return;
     default:
