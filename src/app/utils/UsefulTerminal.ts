@@ -30,6 +30,10 @@ export default class UsefulTerminal {
     return [answer.selectedIndex, answer.selectedText];
   }
 
+  static showKeyValuePair(key: string, value: any) {
+    terminal.yellow(key).green(value).white("\n");
+  }
+
   static title(text: string) {
     terminal.clear();
 
