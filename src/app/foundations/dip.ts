@@ -2,23 +2,33 @@ import race from "@/core/race";
 import UsefulTerminal from "../utils/UsefulTerminal";
 import Fusca from "@/core/Fusca";
 import Ferrari from "@/core/Ferrari";
+import Car from "@/core/ports/Car";
 
 export default async function dip() {
-    UsefulTerminal.title("Dependency inversion principle, aka DIP")
+  UsefulTerminal.clear();
 
-    const [carTypeIndex] = await UsefulTerminal.select("Choose a car: ", ["Fusca", "Ferrari"])
+  UsefulTerminal.title("Dependency inversion principle, aka DIP");
 
-    const chosenCar = carTypeIndex === 0 ? new Fusca() : new Ferrari()
+  const [carTypeIndex] = await UsefulTerminal.select("Choose a car: ", [
+    "Fusca",
+    "Ferrari",
+  ]);
 
-    const { accelerationHistory, brakeHistory } = race(chosenCar)
+  let chosenCar: Car;
 
-    accelerationHistory.forEach((speed) => {
-        UsefulTerminal.showKeyValuePair("Velocidade atual: ", speed);
-    })
+  switch (carTypeIndex) {
+    case 0:
+      chosenCar = new Fusca();
+      break;
+    case 1:
+      chosenCar = new Ferrari();
+      break;
+    default:
+      chosenCar = new Ferrari();
+      break;
+  }
 
-    brakeHistory.forEach((speed) => {
-        UsefulTerminal.showKeyValuePair("Velocidade atual: ", speed);
-    })
+  race(chosenCar, UsefulTerminal.print);
 
-    await UsefulTerminal.waitEnter()
+  await UsefulTerminal.waitEnter();
 }
