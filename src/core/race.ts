@@ -1,24 +1,18 @@
 import Car from "./ports/Car";
 
-export default function race(car: Car): {
-  accelerationHistory: number[];
-  brakeHistory: number[];
-} {
-  const accelerationHistory: number[] = [];
+export default function race(
+  car: Car,
+  logger: (str: string) => void = console.log
+) {
+  const numberOfLoops = 10;
 
-  Array.from({ length: 10 }).forEach(() => {
+  Array.from({ length: numberOfLoops }).forEach(() => {
     car.accelerate();
-
-    accelerationHistory.push(car.actualSpeed);
+    logger(`Velocidade atual: ${car.actualSpeed} km/h`);
   });
 
-  const brakeHistory: number[] = [];
-
-  Array.from({ length: 10 }).forEach(() => {
+  Array.from({ length: numberOfLoops }).forEach(() => {
     car.brake();
-
-    brakeHistory.push(car.actualSpeed);
+    logger(`Velocidade atual: ${car.actualSpeed} km/h`);
   });
-
-  return { accelerationHistory, brakeHistory };
 }
