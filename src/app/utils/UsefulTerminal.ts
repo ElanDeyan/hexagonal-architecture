@@ -13,6 +13,10 @@ export default class UsefulTerminal {
     terminal.clear();
   }
 
+  static print(str: string) {
+    terminal.white(`\n${str}`);
+  }
+
   static async menu(options: string[]): Promise<[number, string]> {
     const answer = await terminal.singleColumnMenu(options).promise;
 
@@ -39,5 +43,10 @@ export default class UsefulTerminal {
 
     terminal.magenta(`${text}\n`);
     terminal.magenta(`${"-".repeat(text.length)}\n`);
+  }
+
+  static async waitEnter(): Promise<void> {
+    terminal.white("\nPress ENTER to continue...");
+    await terminal.inputField({ echo: false }).promise;
   }
 }
